@@ -1,0 +1,325 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Los Menos Buscados</title>
+
+    <link rel="stylesheet" href="{% static 'carteles_criminale/css/style.css' %}">
+</head>
+
+<body>
+
+
+    <div id="contenidoPrincipal" style="display:block;">
+
+        <header>
+
+            <h1 class="titulo2">
+                CARTELES DE SE BUSCA
+            </h1>
+
+        </header>
+
+
+
+        <div class="hola">
+
+            <img src="{% static 'carteles_criminale/imagenes/1.jpg' %}"
+                 onclick="abrirVentana('ventana1')">
+
+            <img src="{% static 'carteles_criminale/imagenes/2.jpg' %}"
+                 onclick="abrirVentana('ventana2')">
+
+            <img src="{% static 'carteles_criminale/imagenes/3.jpg' %}"
+                 onclick="abrirVentana('ventana3')">
+
+            <img src="{% static 'carteles_criminale/imagenes/4.jpg' %}"
+                 onclick="abrirVentana('ventana4')">
+
+        </div>
+
+
+
+        <div class="hola">
+
+            <img src="{% static 'carteles_criminale/imagenes/7.jpg' %}"
+                 onclick="abrirVentana('ventana5')">
+
+            <img src="{% static 'carteles_criminale/imagenes/8.png' %}"
+                 onclick="abrirVentana('ventana6')">
+
+            <img src="{% static 'carteles_criminale/imagenes/5.jpg' %}"
+                 onclick="abrirVentana('ventana7')">
+
+            <img src="{% static 'carteles_criminale/imagenes/6.jpg' %}"
+                 onclick="abrirVentana('ventana8')">
+
+        </div>
+
+
+
+        <div id="ventana1" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana1')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/1.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>ARON ROA</h1>
+
+                        <p class="descripcion">
+      Peligroso inhalador de azúcar y azúcar morena. A este peligroso criminal se le ha visto contrabandeando Yogu Yogu afuera de un instituto, con altos niveles de azúcar. Se recompensará con 3 Yogu Yogu al que pueda capturarlo.,
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ventana2" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana2')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/2.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>Esteban ibañes</h1>
+
+                        <p class="descripcion">
+      Peligroso ludópata de zapatos. Este criminal pasa todo el día apostando zapatos y acumulando deudas. Aquel que logre capturarlo recibirá todas las deudas que ha acumulado con los años. Pedimos su cooperación.,
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="ventana3" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana3')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/3.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>Benjamin Fuentes</h1>
+
+                        <p class="descripcion">
+      Los policías que vinieron de intercambio desde EE. UU. nos han informado de este carterista, que ha estado robando una gran cantidad de celulares. Al que logre capturarlo se le entregarán los celulares que haya robado.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ventana4" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana4')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/4.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>Miguel escobar</h1>
+
+                        <p class="descripcion">
+      Este peligroso traficante de helados ha intentado vender helado en estado puro a niños de la zona central de Chile. Se le considera uno de los peores criminales del Estado. Al que logre capturarlo se le recompensará con 2 uvas y 1 mandarina que estaban en mi refrigerador.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="ventana5" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana5')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/7.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>Hector Campos</h1>
+
+                        <p class="descripcion">
+      se le a visto a este criminal suplicandole a una tal noelle se dise que incluso se le acabo el piso para arrastrarse y a empezado a construir su propio piso cuando se le le acabo a empezado a cavar por ende su recompensa aumenta a una migaja y 1 palo.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="ventana6" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana6')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/8.png' %}">
+
+                    <div class="texto">
+
+                        <h1>VÍCTOR VÁSQUEZ</h1>
+
+                        <p class="descripcion">
+      Este peligroso criminal es el líder espiritual del Ku Klux Klan y, además, un profesor en un instituto, el cual ha llevado a la desesperación más grande a sus alumnos con preguntas tan difíciles que ni siquiera el propio Albert Einstein podría responder. La recompensa por capturarlo es pasar el curso.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ventana7" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana7')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/5.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>NICOLAS MADURO</h1>
+
+                        <p class="descripcion">
+      Este criminal llamado Nicolás Maduro es el presidente más corrupto de la historia de Venezuela, el cual posee la habilidad de multiplicar los penes. Ya fue capturado por las fuerzas especiales de EE. UU. Actualmente se encuentra en una prisión de máxima seguridad. La recompensa por capturarlo fue Venezuela.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="ventana8" class="ventana">
+
+            <div class="contenido">
+
+                <span class="cerrar"
+                      onclick="cerrarVentana('ventana8')">
+                    &times;
+                </span>
+
+                <div class="info">
+
+                    <img src="{% static 'carteles_criminale/imagenes/6.jpg' %}">
+
+                    <div class="texto">
+
+                        <h1>Chuck Norris</h1>
+
+                        <p class="descripcion">
+      No sé quién ha sido el estúpido que puso a Chuck Norris en esta lista, pero lo único que puedo decir es: pobre del pendejo que intente ir a capturarlo. La recompensa por esa ofensa es la posibilidad de no morir. Así, sin más, ahora repasemos algunas hazañas de nuestra deidad Chuck Norris. En una ocasión, la muerte tuvo una experiencia cercana a Chuck Norris. Chuck Norris se pasó todos los Metal Slug con una sola moneda de 1 centavo. Las lágrimas de Chuck Norris curan el cáncer. El problema es que él nunca llora. Chuck Norris ha contado hasta el infinito. Dos veces.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        function abrirVentana(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        function cerrarVentana(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>

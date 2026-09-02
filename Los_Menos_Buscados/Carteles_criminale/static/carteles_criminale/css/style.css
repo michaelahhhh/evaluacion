@@ -1,0 +1,148 @@
+.hola {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 100px;
+}
+
+.hola img {
+    width: 150px;
+    cursor: pointer;
+}
+
+.titulo {
+    background-color: #f5deb3;
+    padding: 15px;
+    border: 3px solid #8B4513;
+    text-align: center;
+    font-family: Georgia, serif;
+    width: fit-content;
+    margin: 20px auto;
+    margin-top: -80px;
+}
+
+.titulo2 {
+    background-color: #f5deb3;
+    padding: 15px;
+    border: 3px solid #8B4513;
+    text-align: center;
+    font-family: Georgia, serif;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.descripcion {
+    background-color: #f5deb3;
+    padding: 15px;
+    border: 3px solid #8B4513;
+    text-align: center;
+    font-family: Georgia, serif;
+    width: fit-content;
+    margin: auto;
+}
+
+.descripcion2 {
+    background-color: #f5deb3;
+    padding: 15px;
+    border: 3px solid #8B4513;
+    text-align: left;
+    font-family: Georgia, serif;
+    width: fit-content;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #f5deb3;
+    color: #8B4513;
+    padding: 15px;
+    border: 3px solid #8B4513;
+    text-align: center;
+    font-family: Georgia, serif;
+    border-radius: 5px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.hola2 {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+.hola2 img {
+    width: 150px;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Playbill";
+    font-size: 70px;
+    color: rgb(80, 44, 12);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-image: url("../imagenes/fondo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.login-contenedor {
+    text-align: center;
+    background-color: #f5deb3;
+    border: 3px solid #8B4513;
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+}
+
+.login-contenedor input {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+}
+
+.ventana {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.contenido {
+    background-color: #f5deb3;
+    width: 70%;
+    margin: 8% auto;
+    padding: 20px;
+    border: 4px solid #8B4513;
+}
+
+.cerrar {
+    float: right;
+    font-size: 40px;
+    cursor: pointer;
+    color: #8B4513;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.info img {
+    width: 250px;
+    border: 4px solid #8B4513;
+}
+
+.texto {
+    display: flex;
+    flex-direction: column;
+}
