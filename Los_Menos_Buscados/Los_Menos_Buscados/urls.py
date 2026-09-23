@@ -17,7 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Carteles_criminale import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.display, name='display'),
+    path('cartel/crear/', views.crear_cartel, name='crear_cartel'),
+    path('cartel/<int:pk>/editar/', views.editar_cartel, name='editar_cartel'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

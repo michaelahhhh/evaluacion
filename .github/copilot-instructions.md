@@ -1,30 +1,76 @@
 # Copilot instructions for this repo
 
-## Project shape
-- This is a Django project named `Los_Menos_Buscados` with a single app named `Carteles_criminale`.
-- The app is organized under `Los_Menos_Buscados/Carteles_criminale/`; key files are `models.py`, `views.py`, `apps.py`, `static/`, and `Temaplates/`.
-- The app is still a prototype: `views.py` is mostly a stub, `models.py` defines a `Cartel` model, and `data/carteles.json` exists but is empty.
-- If you add features, check both the Django project layer (`Los_Menos_Buscados/settings.py`, `Los_Menos_Buscados/urls.py`) and the app layer before changing behavior.
+## Project Shape
+**Los Menos Buscados** is a Django 5.1 prototype displaying humorous "wanted posters" for a gallery interface. The single app `Carteles_criminale` contains all logic.
 
-## Important patterns and quirks
-- The template folder is spelled `Temaplates` (with an extra `a`) and is nested as `Carteles_criminale/Temaplates/Carteles_criminales/Index.html`.
-- Static assets live under `Carteles_criminale/static/carteles_criminale/`, but the HTML currently references `carteles/...` paths and a CSS file named `styles.css`; the actual file is `css/style.css`.
-- The app name and static namespace are inconsistent (`Carteles_criminale` vs `carteles`), so preserve the existing convention when touching templates or static references.
-- The page in `Index.html` is a front-end mockup: login form, gallery of wanted posters, and modal “ventana” popups driven by inline JavaScript.
-- The codebase does not yet follow a clean MVC pattern for the gallery; it mixes static HTML, CSS, and JS directly in the template.
+- **Project root**: `Los_Menos_Buscados/` — run Django from here  
+- **App location**: `Carteles_criminale/` — models, views, templates, static assets  
+- **Key routing**: Project-level URLs in `Los_Menos_Buscados/urls.py` routes `''` to `views.display()`, which renders the gallery template  
+- **Database**: SQLite (`db.sqlite3`) with `Cartel` model (fields: `nombre`, `descripcion`, `foto`)  
+- **Current scope**: `Index.html` is a frontend mockup (gallery + modal popups); `views.py` only renders templates; `data/carteles.json` is unused and empty
 
-## Workflow
-- Run the project from `Los_Menos_Buscados/`: `cd Los_Menos_Buscados && python manage.py runserver`.
-- For Django changes, validate with `python manage.py check` and, if you add models, use `python manage.py makemigrations` / `python manage.py migrate`.
-- There are no tests or migration files in the app yet; treat this as a lightweight learning project unless the user asks for a full app build-out.
+## Critical Name & Path Conventions  
+**Preserve these exactly or the app breaks:**
 
-## Existing conventions to follow
-- Keep template names and directory casing consistent with the current project even when they are misspelled; changing them blindly may break the app.
-- Prefer small, direct edits in the existing Django app structure rather than introducing a new app or framework.
-- The HTML uses Spanish labels (`INICIAR SESIÓN`, `REGISTRO`, `CARTELES DE SE BUSCA`) and a Western-themed UI; preserve that tone if you extend the interface.
-- Example model usage: `Cartel(nombre, descripcion, foto)` in `models.py` is the intended data shape for future catalog entries.
+- **Template folder**: `Temaplates/` (misspelled with extra 'a') → `Carteles_criminales/Index.html` (note plural in folder)  
+- **Static namespace**: Use `carteles_criminale` in template `{% static %}` tags, e.g., `{% static 'carteles_criminale/css/style.css' %}`  
+- **App name in settings**: `INSTALLED_APPS` includes `'Carteles_criminale'` (underscore, not hyphen)  
+- **URL routes**: Single root route in project `urls.py`; no app-level `urls.py` file exists
 
-## Gotchas
-- `settings.py` currently has a missing comma in `INSTALLED_APPS` (`'Carteles_criminale'` followed by `'django.contrib.admin'`), so verify app registration before assuming Django can load the app.
-- `Index.html` includes inline JS for `iniciarSesion`, `registrarse`, `abrirVentana`, and `cerrarVentana`; if you refactor to JS files, keep the existing DOM IDs and modal behavior.
-- `data/carteles.json` is empty and not wired into views yet; avoid assuming the app loads poster data from JSON unless you explicitly implement that flow.
+## Architecture & Data Flow
+
+1. **Entry point**: User GETs `/` → `views.display()` → renders `Index.html`  
+2. **Frontend**: HTML gallery with 8 hardcoded wanted posters + inline JS (`abrirVentana()`, `cerrarVentana()`) for modal popups  
+3. **Static files**: CSS/JS/images in `Carteles_criminale/static/carteles_criminale/` — always reference via `{% static %}` template tags, never hardcoded paths  
+4. **Data integration path** (not yet implemented): 
+   - Django model `Cartel` is defined but unused; views could populate modal content from model instances via context
+   - `data/carteles.json` was intended to seed data but remains empty and unwired  
+   - `promp.txt` contains the canonical descriptions for 8 joke character profiles (source of truth if populating data)
+
+## Content Guidelines  
+- **Language**: All user-facing text is Spanish (`CARTELES DE SE BUSCA`, `INICIAR SESIÓN`, `REGISTRO`)  
+- **Tone**: Humorous/satirical Western "wanted poster" theme with fictional, comedic character profiles  
+- **Territory**: App is a prototype learning project, not a production system
+
+## Developer Workflow
+```bash
+cd Los_Menos_Buscados
+python manage.py check                    # Validate app registration & settings
+python manage.py runserver                # Start dev server (localhost:8000)
+python manage.py makemigrations           # After model changes
+python manage.py migrate                  # Apply migrations to DB
+```
+
+## Critical Gotchas
+1. **No migration history exists**: If you add `Cartel` records to the database, you must run `makemigrations` then `migrate`  
+2. **Template path is hardcoded**: `TEMPLATES['DIRS']` in `settings.py` points to the misspelled `Temaplates` folder — renaming it breaks template loading  
+3. **Static files require `{% static %}` tags**: The template correctly uses `{% load static %}` and the `carteles_criminale` namespace; do not hardcode `/static/` paths  
+4. **Inline JS in template**: Modal interaction functions (`abrirVentana()`, `cerrarVentana()`) are defined in `Index.html` — if refactoring to external JS files, preserve DOM element IDs and function signatures  
+5. **No tests or CI**: Treat as a learning/prototype project; no test suite is configured
+
+## Django Admin Integration
+- **Admin interface**: Model `Cartel` is registered in `admin.py` with `@admin.register` decorator  
+- **Access admin**: Navigate to `/admin/` after creating a superuser (`python manage.py createsuperuser`)  
+- **Admin display**: Shows `nombre`, `descripcion`, `foto` with search/filter capabilities  
+
+## Forms & Views
+- **Forms**: `forms.py` defines `CartelForm` (ModelForm) with styled widgets for HTML5 inputs  
+- **Views**:
+  - `display()` — renders gallery with all cartels from database
+  - `crear_cartel()` — POST handler for new cartel creation (form page at `/cartel/crear/`)
+  - `editar_cartel(pk)` — POST handler for editing existing cartel (form page at `/cartel/<id>/editar/`)
+- **Form template**: `formulario_cartel.html` — shared template for create/edit with Spanish labels and error handling
+
+## URL Routes
+- `/` — Gallery display (name: `display`)  
+- `/admin/` — Django admin panel  
+- `/cartel/crear/` — Create new cartel form (name: `crear_cartel`)  
+- `/cartel/<id>/editar/` — Edit cartel form (name: `editar_cartel`)
+
+## When Extending or Modifying
+- **Add models**: Define in `models.py`, run `makemigrations`/`migrate`, register in `admin.py`, create ModelForm in `forms.py`  
+- **Add views/routes**: Register new paths in `Los_Menos_Buscados/urls.py`; create corresponding templates  
+- **Modify templates**: Use Spanish labels; preserve the Western-themed aesthetic  
+- **Add static assets**: Place in `Carteles_criminale/static/carteles_criminale/{css,js,imagenes}/` and reference with `{% static 'carteles_criminale/...' %}`  
+- **Admin customization**: Edit `@admin.register` decorator in `admin.py` to add filters, actions, or custom layout
+- **Refactor JS**: If moving inline `Index.html` functions to `ventanas.js`, update script src and ensure modal logic remains intact
