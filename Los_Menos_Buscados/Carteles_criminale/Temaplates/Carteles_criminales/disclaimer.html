@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - Los Menos Buscados</title>
+    <link rel="stylesheet" href="{% static 'carteles_criminale/css/style.css' %}">
+</head>
+<body>
+
+    <main class="disclaimer-contenedor">
+        <section class="disclaimer-panel">
+            <h1>AVISO IMPORTANTE</h1>
+
+            <p>
+                Bienvenido a Los Menos Buscados.
+                Antes de continuar, debes leer este aviso.
+            </p>
+
+            <p>
+                Esta página es un proyecto educativo y de entretenimiento.
+                Los carteles y sus contenidos pueden ser ficticios o humorísticos o medianamente 
+                reales (profesor victor) y no deben interpretarse como acusaciones reales contra personas y tambien
+                tenga en cuenta que esta pagina es usada por amigos que se tienen respeto
+                tanto hacia ellos como a los traumas de los otros, gracias por leer.
+            </p>
+
+            <p>
+                No utilices la información publicada para acosar,
+                amenazar o perjudicar a otras personas, por que si no
+                Chuck Norris ira por ti.
+            </p>
+
+            <p>
+                Al continuar, confirmas que has leído este aviso.
+            </p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-crear">
+                    LEER Y CONTINUAR
+                </button>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

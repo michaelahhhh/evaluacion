@@ -1,0 +1,74 @@
+[
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 1,
+        "fields": {
+            "nombre": "ARON ROA",
+            "descripcion": "Peligroso inhalador de azúcar y azúcar morena. A este peligroso criminal se le ha visto contrabandeando Yogu Yogu afuera de un instituto, con altos niveles de azúcar. Se recompensará con 3 Yogu Yogu al que pueda capturarlo.",
+            "foto": "carteles/1.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 2,
+        "fields": {
+            "nombre": "Esteban ibañes",
+            "descripcion": "Peligroso ludópata de zapatos. Este criminal pasa todo el día apostando zapatos y acumulando deudas. Aquel que logre capturarlo recibirá todas las deudas que ha acumulado con los años. Pedimos su cooperación.",
+            "foto": "carteles/2.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 3,
+        "fields": {
+            "nombre": "Benjamin Fuentes",
+            "descripcion": "Los policías que vinieron de intercambio desde EE. UU. nos han informado de este carterista, que ha estado robando una gran cantidad de celulares. Al que logre capturarlo se le entregarán los celulares que haya robado.",
+            "foto": "carteles/3.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 4,
+        "fields": {
+            "nombre": "Miguel escobar",
+            "descripcion": "Este peligroso traficante de helados ha intentado vender helado en estado puro a niños de la zona central de Chile. Se le considera uno de los peores criminales del Estado. Al que logre capturarlo se le recompensará con 2 uvas y 1 mandarina que estaban en mi refrigerador.",
+            "foto": "carteles/4.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 5,
+        "fields": {
+            "nombre": "Hector Campos",
+            "descripcion": "Se le ha visto a este criminal suplicándole a una tal Noelle. Se dice que incluso ha empezado a construir su propio piso cuando se le acabó el piso para arrastrarse. Por ende, su recompensa aumenta a una migaja y 1 palo.",
+            "foto": "carteles/7.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 6,
+        "fields": {
+            "nombre": "VÍCTOR VÁSQUEZ",
+            "descripcion": "Este personaje es presentado como un peligroso criminal y profesor de un instituto, conocido por llevar a sus alumnos a la desesperación con preguntas muy difíciles. La recompensa por capturarlo es pasar el curso.",
+            "foto": "carteles/8.png"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 7,
+        "fields": {
+            "nombre": "NICOLAS MADURO",
+            "descripcion": "Este cartel presenta a Nicolás Maduro como un personaje ficticio dentro de la temática humorística de la página. La recompensa indicada en el cartel es Venezuela.",
+            "foto": "carteles/5.jpg"
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "pk": 8,
+        "fields": {
+            "nombre": "Chuck Norris",
+            "descripcion": "No sé quién ha sido el estúpido que puso a Chuck Norris en esta lista, pero lo único que puedo decir es: pobre del pendejo que intente ir a capturarlo. La recompensa por esa ofensa es la posibilidad de no morir. Así, sin más, ahora repasemos algunas hazañas de nuestra deidad Chuck Norris. Chuck Norris ha contado hasta el infinito. Dos veces.",
+            "foto": "carteles/6.jpg"
+        }
+    }
+]

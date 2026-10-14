@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta</title>
+
+    <link rel="stylesheet" href="{% static 'carteles_criminale/css/style.css' %}">
+</head>
+<body>
+
+    <main class="login-contenedor acceso-panel">
+        <h1>CREAR CUENTA</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for campo in formulario %}
+                <div class="campo-formulario">
+                    <label for="{{ campo.id_for_label }}">
+                        {% if campo.name == 'username' %}
+                            Nombre de usuario (mínimo 4 caracteres)
+                        {% else %}
+                            {{ campo.label }}
+                        {% endif %}
+                    </label>
+
+                    {{ campo }}
+
+                    {% if campo.help_text %}
+                        <div class="ayuda">
+                            {{ campo.help_text|safe }}
+                        </div>
+                    {% endif %}
+
+                    {% if campo.errors %}
+                        <div class="error-lista">
+                            {% for error in campo.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% if formulario.non_field_errors %}
+                <div class="error-lista">
+                    {% for error in formulario.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn-crear">
+                REGISTRARSE
+            </button>
+        </form>
+
+        <p>
+            ¿Ya tienes una cuenta?
+            <a href="{% url 'login' %}" class="acceso-enlace">
+                Inicia sesión
+            </a>
+        </p>
+
+        <p>
+            <a href="{% url 'disclaimer' %}" class="acceso-enlace">
+                Volver al inicio
+            </a>
+        </p>
+    </main>
+
+</body>
+</html>

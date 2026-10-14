@@ -14,17 +14,42 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# Los_Menos_Buscados/urls.py
+
 from django.contrib import admin
 from django.urls import path
-from Carteles_criminale import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from Carteles_criminale import views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.display, name='display'),
+
+    path('', views.disclaimer, name='disclaimer'),
+    path('login/', views.iniciar_sesion, name='login'),
+    path('registro/', views.registrar_usuario, name='register'),
+    path('logout/', views.cerrar_sesion, name='logout'),
+
+    path('carteles/', views.display, name='display'),
+
     path('cartel/crear/', views.crear_cartel, name='crear_cartel'),
-    path('cartel/<int:pk>/editar/', views.editar_cartel, name='editar_cartel'),
+    path(
+        'cartel/<int:pk>/editar/',
+        views.editar_cartel,
+        name='editar_cartel'
+    ),
+    path(
+        'cartel/<int:pk>/eliminar/',
+        views.eliminar_cartel,
+        name='eliminar_cartel'
+    ),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )

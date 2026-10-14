@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - Los Menos Buscados</title>
+    <link rel="stylesheet" href="{% static 'carteles_criminale/css/style.css' %}">
+</head>
+<body>
+
+    <main class="login-contenedor acceso-panel">
+        <h1>INICIAR SESIÓN</h1>
+
+        {% if messages %}
+            {% for mensaje in messages %}
+                <p class="mensaje">{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="{{ formulario.username.id_for_label }}">
+                Nombre de usuario
+            </label>
+            {{ formulario.username }}
+
+            {% if formulario.username.errors %}
+                <div class="error-lista">
+                    {{ formulario.username.errors }}
+                </div>
+            {% endif %}
+
+            <label for="{{ formulario.password.id_for_label }}">
+                Contraseña
+            </label>
+            {{ formulario.password }}
+
+            {% if formulario.password.errors %}
+                <div class="error-lista">
+                    {{ formulario.password.errors }}
+                </div>
+            {% endif %}
+
+            {% if formulario.non_field_errors %}
+                <div class="error-lista">
+                    {{ formulario.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn-crear">
+                ENTRAR
+            </button>
+        </form>
+
+        <p class="acceso-enlace">
+            ¿No tienes cuenta?
+            <a href="{% url 'register' %}">Regístrate aquí</a>
+        </p>
+
+        <p class="acceso-enlace">
+            <a href="{% url 'disclaimer' %}">Volver al aviso</a>
+        </p>
+    </main>
+
+</body>
+</html>
