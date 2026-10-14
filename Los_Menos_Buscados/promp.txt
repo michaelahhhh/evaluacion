@@ -56,3 +56,117 @@ Reglas de la IA:
 * Si el usuario pregunta por una característica o descripción, identifica al personaje correspondiente.
 * No modifiques los nombres de los personajes.
 * La página está desarrollada con HTML y CSS y contiene ventanas emergentes para mostrar la información de cada cartel.
+
+# ANEXO: USO DE INTELIGENCIA ARTIFICIAL DURANTE EL DESARROLLO DEL PROYECTO
+
+**Proyecto:** Los Menos Buscados  
+**Asignatura:** Programación en Back End  
+**Herramienta utilizada:** ChatGPT, de OpenAI  
+**Objetivo:** Utilizar inteligencia artificial como apoyo en la programación, corrección de errores y desarrollo de funcionalidades de la aplicación web.
+
+## 1. Objetivo del uso de inteligencia artificial
+
+Durante el desarrollo del proyecto Los Menos Buscados se utilizó ChatGPT como herramienta de apoyo para resolver dudas relacionadas con Django, revisar código y orientar la implementación de funcionalidades.
+
+Las consultas estuvieron relacionadas con el registro e inicio de sesión, la validación de formularios, la protección de páginas, el manejo de imágenes, la gestión de carteles, la paginación y las operaciones de creación, edición y eliminación de registros.
+
+Las respuestas se utilizaron como orientación para trabajar en el código del proyecto. Las funcionalidades debían comprobarse posteriormente en la aplicación.
+
+## 2. Registro de consultas realizadas durante el desarrollo
+
+**Nota:** Los siguientes puntos resumen los temas de las consultas conservadas sobre el proyecto. No deben considerarse transcripciones literales de los mensajes originales cuando no se dispone de ellos.
+
+### Consulta 1. Registro e inicio de sesión
+
+**Objetivo:** Recibir orientación para implementar el registro de usuarios y el inicio de sesión en Django, de manera que las páginas protegidas solo puedan ser utilizadas por usuarios autenticados.
+
+**Aplicación en el proyecto:** Se trabajó con las funciones de registro, autenticación y redirección entre las páginas.
+
+### Consulta 2. Validación del formulario de registro
+
+**Objetivo:** Corregir la presentación del formulario y validar que el nombre de usuario tuviera un mínimo de cuatro caracteres.
+
+**Aplicación en el proyecto:** Se revisó el uso de formularios de Django y la presentación de mensajes de error.
+
+### Consulta 3. Protección de las páginas
+
+**Objetivo:** Orientar la implementación de un aviso previo al acceso, las redirecciones correspondientes y el cierre de sesión.
+
+**Aplicación en el proyecto:** Se trabajó con sesiones, autenticación y redirecciones entre el aviso inicial, el registro, el inicio de sesión y la página de carteles.
+
+### Consulta 4. Gestión de carteles
+
+**Objetivo:** Implementar formularios para crear carteles con nombre, descripción e imagen, manteniendo los carteles predeterminados de la página.
+
+**Aplicación en el proyecto:** Se trabajó con el modelo `Cartel`, los formularios y las vistas de Django.
+
+### Consulta 5. Paginación
+
+**Objetivo:** Mostrar un máximo de ocho carteles por página e incorporar botones para avanzar y retroceder.
+
+**Aplicación en el proyecto:** Se revisó el uso de `Paginator` y de los parámetros de página recibidos mediante la dirección web.
+
+### Consulta 6. Edición y eliminación de carteles
+
+**Objetivo:** Incorporar opciones para editar y eliminar los carteles almacenados en la base de datos, mostrando sus datos en ventanas emergentes.
+
+**Aplicación en el proyecto:** Se revisaron las vistas de edición y eliminación, los formularios y las acciones disponibles en la interfaz.
+
+### Consulta 7. Permisos de usuarios
+
+**Objetivo:** Planificar un sistema en el que los usuarios normales puedan gestionar sus propios carteles y el administrador tenga control sobre todos los registros.
+
+**Aplicación en el proyecto:** Se identificó la necesidad de relacionar cada cartel con su creador y comprobar los permisos desde el servidor. Esta funcionalidad queda pendiente de implementación y comprobación.
+
+## 3. Prompt de configuración de la IA del proyecto
+
+El archivo `promp.txt` contiene instrucciones para una IA encargada de responder preguntas sobre los carteles de la página. El prompt incluye los nombres, las descripciones y las recompensas de los ocho personajes originales.
+
+Las instrucciones principales son:
+
+- Responder únicamente con la información proporcionada.
+- No inventar datos sobre los personajes.
+- Indicar cuando no exista información suficiente para responder.
+- Entregar respuestas claras y breves.
+- Identificar al personaje correspondiente cuando se pregunte por una característica de su cartel.
+- Mantener los nombres de los personajes sin modificaciones.
+
+Este prompt corresponde a la configuración de la IA para responder preguntas sobre el contenido de la página. No debe confundirse con las consultas realizadas para programar el sitio web.
+
+**Evidencia:** archivo `promp.txt`, incluido en el proyecto.
+
+## 4. Transcripción de la evidencia disponible
+
+La siguiente es una transcripción del objetivo general que aparece en el prompt de configuración del proyecto, presentada como extracto y no como reproducción completa del archivo:
+
+> La IA debe responder preguntas relacionadas con estos carteles, sus nombres y sus descripciones.
+
+También se establecen instrucciones para evitar la invención de información y señalar cuando los datos disponibles sean insuficientes.
+
+**Evidencia complementaria que se debe adjuntar:** capturas de pantalla o exportaciones del historial de ChatGPT donde aparezcan los mensajes originales de las consultas de desarrollo y las respuestas recibidas.
+
+Las consultas resumidas de la sección 2 deben sustituirse o complementarse con los mensajes literales recuperados del historial, para cumplir plenamente con el requisito de prompts exactos de la pauta.
+
+## 5. Aporte de la inteligencia artificial al proyecto
+
+La inteligencia artificial sirvió como apoyo para comprender conceptos de Django, identificar posibles errores y organizar la implementación de funcionalidades.
+
+Sin embargo, las sugerencias de la IA no reemplazan las pruebas del código ni la comprobación de los requisitos. La aplicación debe verificarse mediante pruebas de registro, inicio y cierre de sesión, creación y edición de carteles, manejo de imágenes, paginación, permisos y administración desde Django Admin.
+
+## 6. Referencias bibliográficas
+
+OpenAI. (s. f.). *ChatGPT*. https://chatgpt.com/
+
+Django Software Foundation. (s. f.). *Django documentation*. https://docs.djangoproject.com/
+
+Django Software Foundation. (s. f.). *The Django admin site*. https://docs.djangoproject.com/en/5.1/ref/contrib/admin/
+
+Django Software Foundation. (s. f.). *User authentication in Django*. https://docs.djangoproject.com/en/5.1/topics/auth/
+
+**Nota sobre las referencias:** estas son fuentes oficiales de apoyo para la herramienta y el framework utilizados. Deben revisarse y ajustarse a los recursos efectivamente consultados durante el desarrollo.
+
+## 7. Conclusión
+
+El uso de inteligencia artificial permitió recibir orientación durante el desarrollo de Los Menos Buscados, especialmente en la implementación de funcionalidades con Django y en la revisión de posibles errores.
+
+Se reconoce la inteligencia artificial como una herramienta de apoyo y no como sustituto de la programación, las pruebas o la comprensión del código. Para completar la evidencia solicitada por la evaluación, se deben adjuntar las transcripciones literales o capturas de las consultas originales utilizadas durante el desarrollo.
