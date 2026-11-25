@@ -7,6 +7,7 @@ class CartelAdmin(admin.ModelAdmin):
 
     list_display = (
         "nombre",
+        "usuario",
         "descripcion",
         "foto",
     )
@@ -14,14 +15,16 @@ class CartelAdmin(admin.ModelAdmin):
     search_fields = (
         "nombre",
         "descripcion",
+        "usuario__username",
     )
 
     list_filter = (
-        "nombre",
+        "usuario",
     )
 
     fields = (
         "nombre",
         "descripcion",
         "foto",
+        "usuario",
     )

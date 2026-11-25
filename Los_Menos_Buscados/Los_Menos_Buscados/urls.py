@@ -17,10 +17,9 @@ Including another URLconf
 # Los_Menos_Buscados/urls.py
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-
 from Carteles_criminale import views
 
 
@@ -35,16 +34,10 @@ urlpatterns = [
     path('carteles/', views.display, name='display'),
 
     path('cartel/crear/', views.crear_cartel, name='crear_cartel'),
-    path(
-        'cartel/<int:pk>/editar/',
-        views.editar_cartel,
-        name='editar_cartel'
-    ),
-    path(
-        'cartel/<int:pk>/eliminar/',
-        views.eliminar_cartel,
-        name='eliminar_cartel'
-    ),
+    path('cartel/<int:pk>/editar/', views.editar_cartel, name='editar_cartel'),
+    path('cartel/<int:pk>/eliminar/', views.eliminar_cartel, name='eliminar_cartel'),
+
+    path('api/', include('CriminalesApi.urls')),
 ]
 
 

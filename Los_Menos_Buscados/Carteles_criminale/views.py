@@ -7,7 +7,9 @@ from django.core.paginator import Paginator
 from django.core.exceptions import PermissionDenied
 from django.views.decorators.http import require_POST
 from .models import Cartel
-from .forms import CartelForm
+from .forms import CartelForm, RegistroUsuarioForm
+from django.db import OperationalError, InterfaceError
+
 
 def disclaimer(request):
 
@@ -69,7 +71,7 @@ def registrar_usuario(request):
     if request.user.is_authenticated:
         return redirect('display')
 
-    formulario = UserCreationForm(request.POST or None)
+    formulario = RegistroUsuarioForm(request.POST or None)
 
     if request.method == 'POST' and formulario.is_valid():
 
@@ -115,19 +117,31 @@ def cerrar_sesion(request):
 
 def display(request):
 
-    todos_los_carteles = Cartel.objects.all().order_by(
-        'usuario_id', 'id'
-    )
+    try:
 
-    paginador = Paginator(todos_los_carteles, 8)
+        todos_los_carteles = list(
+            Cartel.objects.all().order_by('usuario_id', 'id')
+        )
 
-    pagina = paginador.get_page(request.GET.get('page'))
+        paginador = Paginator(todos_los_carteles, 8)
 
-    contexto = {
-        'carteles': pagina.object_list,
-        'pagina_actual': pagina.number,
-        'total_paginas': paginador.num_pages,
-    }
+        pagina = paginador.get_page(request.GET.get('page'))
+
+        contexto = {
+            'carteles': pagina.object_list,
+            'pagina_actual': pagina.number,
+            'total_paginas': paginador.num_pages,
+            'error_conexion': False,
+        }
+
+    except (OperationalError, InterfaceError):
+
+        contexto = {
+            'carteles': [],
+            'pagina_actual': 1,
+            'total_paginas': 1,
+            'error_conexion': True,
+        }
 
     return render(
         request,

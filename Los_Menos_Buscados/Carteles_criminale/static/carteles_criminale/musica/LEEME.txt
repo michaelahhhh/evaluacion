@@ -1,0 +1,8 @@
+Coloca aquí el archivo de música que quieras reproducir.
+
+Nombre recomendado: musica.mp3
+
+En Index.html, el reproductor busca actualmente:
+static/carteles_criminale/musica/musica.mp3
+
+Puedes renombrar el archivo y actualizar el atributo src del elemento <audio>, o bien usar otro formato como .ogg o .wav.

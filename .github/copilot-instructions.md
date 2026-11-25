@@ -1,76 +1,47 @@
 # Copilot instructions for this repo
 
-## Project Shape
-**Los Menos Buscados** is a Django 5.1 prototype displaying humorous "wanted posters" for a gallery interface. The single app `Carteles_criminale` contains all logic.
+## Architecture
+- Run Django from `Los_Menos_Buscados/` (the directory containing `manage.py`), not the workspace root.
+- This is a Django 5.1 prototype with two apps: `Carteles_criminale` (UI, auth, CRUD) and `CriminalesApi` (weather JSON service).
+- `Los_Menos_Buscados/Los_Menos_Buscados/urls.py` owns all project routes. Keep API routes under `/api/` and preserve the existing `{% url ... %}` names.
+- The main flow is `views.disclaimer -> login/register -> /carteles/`; `/` renders the disclaimer, while the gallery is at `/carteles/`.
+- `Cartel` (`nombre`, `descripcion`, `foto`, `usuario`) is owned by Django's `User`; creation assigns `cartel.usuario=request.user`, and edit/delete authorization is centralized in `tiene_permiso_cartel()`.
+- The gallery paginates 8 records in `views.display()` and handles MySQL `OperationalError`/`InterfaceError` with `error_conexion=True`.
 
-- **Project root**: `Los_Menos_Buscados/` — run Django from here  
-- **App location**: `Carteles_criminale/` — models, views, templates, static assets  
-- **Key routing**: Project-level URLs in `Los_Menos_Buscados/urls.py` routes `''` to `views.display()`, which renders the gallery template  
-- **Database**: SQLite (`db.sqlite3`) with `Cartel` model (fields: `nombre`, `descripcion`, `foto`)  
-- **Current scope**: `Index.html` is a frontend mockup (gallery + modal popups); `views.py` only renders templates; `data/carteles.json` is unused and empty
+## Critical paths and names
+- Preset paths are intentionally misspelled: templates live in `Carteles_criminale/Temaplates/Carteles_criminales/`, and TEMPLATES `DIRS` depends on that exact folder.
+- Static assets use `{% load static %}` and the `carteles_criminale` namespace, e.g. `{% static 'carteles_criminale/css/style.css' %}`.
+- Gallery UI and inline weather/modal JavaScript are in `Carteles_criminale/Temaplates/Carteles_criminales/Index.html`; do not change IDs such as `cartel{{ cartel.id }}`, `ciudadClima`, or `clima` without updating the script.
+- The template contains `abrirVentana()`/`cerrarVentana()` behavior directly; `static/carteles_criminale/js/ventanas.js` mirrors only the basic modal functions.
+- Uploaded files are served from `MEDIA_ROOT = BASE_DIR / 'media'` and stored under `media/carteles/`; use ImageField `.foto.url` in templates.
 
-## Critical Name & Path Conventions  
-**Preserve these exactly or the app breaks:**
+## Data and external integrations
+- Settings currently use MySQL (`los_menos_buscados`, root, localhost:3306), not the nearby `db.sqlite3`. XAMPP/MySQL must be running for normal CRUD and gallery queries.
+- Before changing models, inspect `Carteles_criminale/migrations/`; `0002_cartel_usuario.py` adds ownership. Run migrations before expecting the schema to match the model.
+- `CriminalesApi/services.py` uses stdlib `urllib` to call Open-Meteo geocoding and forecast APIs; it has a 10-second timeout and returns Spanish user-facing status text.
+- `CriminalesApi/views.py` exposes GET JSON; validate city input and preserve status 400/502 response patterns. The intended frontend call is `/api/clima/?ciudad=<city>`.
+- `los_menos_buscados.sql` and `carteles.json` may describe or seed data, but they are not loaded automatically by Django. `promp.txt` contains humorous source descriptions.
 
-- **Template folder**: `Temaplates/` (misspelled with extra 'a') → `Carteles_criminales/Index.html` (note plural in folder)  
-- **Static namespace**: Use `carteles_criminale` in template `{% static %}` tags, e.g., `{% static 'carteles_criminale/css/style.css' %}`  
-- **App name in settings**: `INSTALLED_APPS` includes `'Carteles_criminale'` (underscore, not hyphen)  
-- **URL routes**: Single root route in project `urls.py`; no app-level `urls.py` file exists
+## Django conventions
+- Views are function-based and use Django auth decorators. Mutating logout/delete routes use `@require_POST` and CSRF-protected forms.
+- Staff or superusers may edit/delete any cartel; regular users may act only on `cartel.usuario_id == user.id`. Reapply this permission check to new mutation views.
+- Use `CartelForm` for cartel create/edit and return the shared `formulario_cartel.html`. Set `cartel.usuario=request.user` only in create views.
+- Keep user-facing copy in Spanish and the satirical Western wanted-poster tone. Use `django.contrib.messages` for create/update/delete feedback.
+- Crispy Forms (`crispy_forms`/`crispy_bootstrap5`) is installed; the project still mixes it with explicitly styled ModelForm widgets.
 
-## Architecture & Data Flow
-
-1. **Entry point**: User GETs `/` → `views.display()` → renders `Index.html`  
-2. **Frontend**: HTML gallery with 8 hardcoded wanted posters + inline JS (`abrirVentana()`, `cerrarVentana()`) for modal popups  
-3. **Static files**: CSS/JS/images in `Carteles_criminale/static/carteles_criminale/` — always reference via `{% static %}` template tags, never hardcoded paths  
-4. **Data integration path** (not yet implemented): 
-   - Django model `Cartel` is defined but unused; views could populate modal content from model instances via context
-   - `data/carteles.json` was intended to seed data but remains empty and unwired  
-   - `promp.txt` contains the canonical descriptions for 8 joke character profiles (source of truth if populating data)
-
-## Content Guidelines  
-- **Language**: All user-facing text is Spanish (`CARTELES DE SE BUSCA`, `INICIAR SESIÓN`, `REGISTRO`)  
-- **Tone**: Humorous/satirical Western "wanted poster" theme with fictional, comedic character profiles  
-- **Territory**: App is a prototype learning project, not a production system
-
-## Developer Workflow
+## Developer workflow
 ```bash
 cd Los_Menos_Buscados
-python manage.py check                    # Validate app registration & settings
-python manage.py runserver                # Start dev server (localhost:8000)
-python manage.py makemigrations           # After model changes
-python manage.py migrate                  # Apply migrations to DB
+python manage.py check
+python manage.py makemigrations Carteles_criminale
+python manage.py migrate
+python manage.py test
+python manage.py runserver
 ```
+- `django.test.TestCase` files exist for both apps but currently contain no tests. Test database and external MySQL setup are therefore not currently defined.
+- Dependencies in `dependencias.txt` are stale about Django (`django == 4.1` vs settings/migrations generated by Django 5.1); rely on the runtime environment and update dependency files deliberately.
 
-## Critical Gotchas
-1. **No migration history exists**: If you add `Cartel` records to the database, you must run `makemigrations` then `migrate`  
-2. **Template path is hardcoded**: `TEMPLATES['DIRS']` in `settings.py` points to the misspelled `Temaplates` folder — renaming it breaks template loading  
-3. **Static files require `{% static %}` tags**: The template correctly uses `{% load static %}` and the `carteles_criminale` namespace; do not hardcode `/static/` paths  
-4. **Inline JS in template**: Modal interaction functions (`abrirVentana()`, `cerrarVentana()`) are defined in `Index.html` — if refactoring to external JS files, preserve DOM element IDs and function signatures  
-5. **No tests or CI**: Treat as a learning/prototype project; no test suite is configured
-
-## Django Admin Integration
-- **Admin interface**: Model `Cartel` is registered in `admin.py` with `@admin.register` decorator  
-- **Access admin**: Navigate to `/admin/` after creating a superuser (`python manage.py createsuperuser`)  
-- **Admin display**: Shows `nombre`, `descripcion`, `foto` with search/filter capabilities  
-
-## Forms & Views
-- **Forms**: `forms.py` defines `CartelForm` (ModelForm) with styled widgets for HTML5 inputs  
-- **Views**:
-  - `display()` — renders gallery with all cartels from database
-  - `crear_cartel()` — POST handler for new cartel creation (form page at `/cartel/crear/`)
-  - `editar_cartel(pk)` — POST handler for editing existing cartel (form page at `/cartel/<id>/editar/`)
-- **Form template**: `formulario_cartel.html` — shared template for create/edit with Spanish labels and error handling
-
-## URL Routes
-- `/` — Gallery display (name: `display`)  
-- `/admin/` — Django admin panel  
-- `/cartel/crear/` — Create new cartel form (name: `crear_cartel`)  
-- `/cartel/<id>/editar/` — Edit cartel form (name: `editar_cartel`)
-
-## When Extending or Modifying
-- **Add models**: Define in `models.py`, run `makemigrations`/`migrate`, register in `admin.py`, create ModelForm in `forms.py`  
-- **Add views/routes**: Register new paths in `Los_Menos_Buscados/urls.py`; create corresponding templates  
-- **Modify templates**: Use Spanish labels; preserve the Western-themed aesthetic  
-- **Add static assets**: Place in `Carteles_criminale/static/carteles_criminale/{css,js,imagenes}/` and reference with `{% static 'carteles_criminale/...' %}`  
-- **Admin customization**: Edit `@admin.register` decorator in `admin.py` to add filters, actions, or custom layout
-- **Refactor JS**: If moving inline `Index.html` functions to `ventanas.js`, update script src and ensure modal logic remains intact
+## Known code risks
+- The project URLs currently declare `urlpatterns` twice: the first `/api/` include is overwritten by the second list, so `/api/clima/` will not work until the API include is merged into the final list.
+- `RegistroUsuarioForm` exists but `registrar_usuario()` currently uses Django's built-in `UserCreationForm`, not `RegistroUsuarioForm`.
+- Preserve the `Temaplates` spelling and `Carteles_criminale`/`CriminalesApi` underscore distinctions when adding imports or routes.

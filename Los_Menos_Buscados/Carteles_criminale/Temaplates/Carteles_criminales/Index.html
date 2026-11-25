@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -15,8 +14,6 @@
 <body>
 
     <div id="contenidoPrincipal">
-
-        <!-- BARRA DE USUARIO -->
 
         <nav class="barra-usuario">
 
@@ -58,9 +55,6 @@
 
         </nav>
 
-
-        <!-- MENSAJES -->
-
         {% if messages %}
 
             <div class="mensajes">
@@ -73,9 +67,6 @@
 
         {% endif %}
 
-
-        <!-- TITULO PRINCIPAL -->
-
         <header>
 
             <h1 class="titulo2">
@@ -84,106 +75,155 @@
 
         </header>
 
+        <section class="clima-container">
 
-        <!-- CARTELES DESDE LA BASE DE DATOS -->
+            <div class="clima-header">
+                <h2>CLIMA ACTUAL</h2>
+                <span class="clima-icon" id="climaIcono">☀</span>
+            </div>
 
-        <div class="hola">
+            <div class="clima-buscador">
+                <input
+                    type="text"
+                    id="ciudadClima"
+                    placeholder="Ingrese una ciudad"
+                    value="Santiago"
+                >
+
+                <button type="button" onclick="consultarClima()">
+                    CONSULTAR
+                </button>
+            </div>
+
+            <div id="clima" class="clima-info">
+                Consultando información meteorológica...
+            </div>
+
+        </section>
+
+        {% if error_conexion %}
+
+            <div class="error-conexion">
+
+                <h2>¡CONEXIÓN PERDIDA!</h2>
+
+                <p>
+                    No se pudo establecer conexión con la base de datos.
+                </p>
+
+                <p>
+                    El servicio MySQL de XAMPP podría estar apagado.
+                </p>
+
+                <p>
+                    Comprueba que MySQL esté iniciado e intenta nuevamente.
+                </p>
+
+                <button
+                    onclick="location.reload()"
+                    class="btn-crear"
+                >
+                    REINTENTAR CONEXIÓN
+                </button>
+
+            </div>
+
+        {% else %}
+
+            <div class="hola">
+
+                {% for cartel in carteles %}
+
+                    <img
+                        src="{{ cartel.foto.url }}"
+                        alt="{{ cartel.nombre }}"
+                        onclick="abrirVentana('cartel{{ cartel.id }}')"
+                    >
+
+                {% empty %}
+
+                    <p class="sin-carteles">
+                        Todavía no hay carteles registrados.
+                    </p>
+
+                {% endfor %}
+
+            </div>
 
             {% for cartel in carteles %}
 
-                <img
-                    src="{{ cartel.foto.url }}"
-                    alt="{{ cartel.nombre }}"
-                    onclick="abrirVentana('cartel{{ cartel.id }}')"
+                <div
+                    id="cartel{{ cartel.id }}"
+                    class="ventana"
                 >
 
-            {% empty %}
+                    <div class="contenido">
 
-                <p class="sin-carteles">
-                    Todavía no hay carteles registrados.
-                </p>
+                        <span
+                            class="cerrar"
+                            onclick="cerrarVentana('cartel{{ cartel.id }}')"
+                        >
+                            &times;
+                        </span>
 
-            {% endfor %}
+                        <div class="info">
 
-        </div>
+                            {% if cartel.foto %}
 
+                                <img
+                                    src="{{ cartel.foto.url }}"
+                                    alt="{{ cartel.nombre }}"
+                                >
 
-        <!-- VENTANAS MODALES DE TODOS LOS CARTELES -->
+                            {% endif %}
 
-        {% for cartel in carteles %}
+                            <div class="texto">
 
-            <div id="cartel{{ cartel.id }}" class="ventana">
+                                <h1>
+                                    {{ cartel.nombre }}
+                                </h1>
 
-                <div class="contenido">
+                                <p class="descripcion">
+                                    {{ cartel.descripcion }}
+                                </p>
 
-                    <span
-                        class="cerrar"
-                        onclick="cerrarVentana('cartel{{ cartel.id }}')"
-                    >
-                        &times;
-                    </span>
+                                {% if user.is_authenticated %}
 
-                    <div class="info">
+                                    {% if user.is_staff or cartel.usuario_id == user.id %}
 
-                        {% if cartel.foto %}
+                                        <div class="acciones-cartel">
 
-                            <img
-                                src="{{ cartel.foto.url }}"
-                                alt="{{ cartel.nombre }}"
-                            >
-
-                        {% endif %}
-
-
-                        <div class="texto">
-
-                            <h1>
-                                {{ cartel.nombre }}
-                            </h1>
-
-                            <p class="descripcion">
-                                {{ cartel.descripcion }}
-                            </p>
-
-
-                            <!-- ACCIONES SEGUN PERMISOS -->
-
-                            {% if user.is_authenticated %}
-
-                                {% if user.is_staff or cartel.usuario_id == user.id %}
-
-                                    <div class="acciones-cartel">
-
-                                        <a
-                                            href="{% url 'editar_cartel' cartel.id %}"
-                                            class="btn-editar-modal"
-                                        >
-                                            EDITAR
-                                        </a>
-
-
-                                        <form
-                                            method="POST"
-                                            action="{% url 'eliminar_cartel' cartel.id %}"
-                                            onsubmit="return confirmarEliminacion();"
-                                        >
-
-                                            {% csrf_token %}
-
-                                            <button
-                                                type="submit"
-                                                class="btn-eliminar"
+                                            <a
+                                                href="{% url 'editar_cartel' cartel.id %}"
+                                                class="btn-editar-modal"
                                             >
-                                                ELIMINAR
-                                            </button>
+                                                EDITAR
+                                            </a>
 
-                                        </form>
+                                            <form
+                                                method="POST"
+                                                action="{% url 'eliminar_cartel' cartel.id %}"
+                                                onsubmit="return confirmarEliminacion();"
+                                            >
 
-                                    </div>
+                                                {% csrf_token %}
+
+                                                <button
+                                                    type="submit"
+                                                    class="btn-eliminar"
+                                                >
+                                                    ELIMINAR
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    {% endif %}
 
                                 {% endif %}
 
-                            {% endif %}
+                            </div>
 
                         </div>
 
@@ -191,71 +231,71 @@
 
                 </div>
 
+            {% endfor %}
+
+            <div class="paginacion">
+
+                {% if pagina_actual > 1 %}
+
+                    <a
+                        href="?page={{ pagina_actual|add:'-1' }}"
+                        class="btn-pagina"
+                    >
+                        ← ANTERIOR
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="?page={{ total_paginas }}"
+                        class="btn-pagina"
+                    >
+                        ← ANTERIOR
+                    </a>
+
+                {% endif %}
+
+                <span class="pagina-actual">
+                    PÁGINA {{ pagina_actual }} DE {{ total_paginas }}
+                </span>
+
+                {% if pagina_actual < total_paginas %}
+
+                    <a
+                        href="?page={{ pagina_actual|add:'1' }}"
+                        class="btn-pagina"
+                    >
+                        SIGUIENTE →
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="?page=1"
+                        class="btn-pagina"
+                    >
+                        SIGUIENTE →
+                    </a>
+
+                {% endif %}
+
             </div>
 
-        {% endfor %}
+        {% endif %}
 
+        <div class="reproductor-musica">
+            <span>MÚSICA</span>
 
-        <!-- PAGINACION -->
-
-        <div class="paginacion">
-
-            {% if pagina_actual > 1 %}
-
-                <a
-                    href="?page={{ pagina_actual|add:'-1' }}"
-                    class="btn-pagina"
+            <audio controls preload="metadata" loop>
+                <source
+                    src="{% static 'carteles_criminale/musica/pietix-cinematic-western-guitar-break-bad-2-527256.mp3' %}"
+                    type="audio/mpeg"
                 >
-                    ← ANTERIOR
-                </a>
-
-            {% else %}
-
-                <a
-                    href="?page={{ total_paginas }}"
-                    class="btn-pagina"
-                >
-                    ← ANTERIOR
-                </a>
-
-            {% endif %}
-
-
-            <span class="pagina-actual">
-
-                PÁGINA {{ pagina_actual }} DE {{ total_paginas }}
-
-            </span>
-
-
-            {% if pagina_actual < total_paginas %}
-
-                <a
-                    href="?page={{ pagina_actual|add:'1' }}"
-                    class="btn-pagina"
-                >
-                    SIGUIENTE →
-
-                </a>
-
-            {% else %}
-
-                <a
-                    href="?page=1"
-                    class="btn-pagina"
-                >
-                    SIGUIENTE →
-
-                </a>
-
-            {% endif %}
-
+                Tu navegador no permite reproducir este audio.
+            </audio>
         </div>
 
     </div>
-
-
-    <!-- JAVASCRIPT -->
 
     <script>
 
@@ -264,26 +304,20 @@
             const ventana = document.getElementById(id);
 
             if (ventana) {
-
                 ventana.style.display = "block";
-
             }
 
         }
-
 
         function cerrarVentana(id) {
 
             const ventana = document.getElementById(id);
 
             if (ventana) {
-
                 ventana.style.display = "none";
-
             }
 
         }
-
 
         function confirmarEliminacion() {
 
@@ -293,33 +327,135 @@
 
         }
 
-
-        // Cerrar modal al hacer clic fuera del contenido
-
         window.addEventListener("click", function(evento) {
 
             if (evento.target.classList.contains("ventana")) {
-
                 evento.target.style.display = "none";
-
             }
 
         });
-
-
-        // Cerrar modal con ESC
 
         document.addEventListener("keydown", function(evento) {
 
             if (evento.key === "Escape") {
 
                 document.querySelectorAll(".ventana").forEach(function(ventana) {
-
                     ventana.style.display = "none";
-
                 });
 
             }
+
+        });
+
+        async function consultarClima() {
+
+            const contenedor = document.getElementById("clima");
+            const ciudad = document.getElementById("ciudadClima").value.trim();
+            const icono = document.getElementById("climaIcono");
+
+            if (!ciudad) {
+                contenedor.textContent = "Ingrese una ciudad para consultar.";
+                return;
+            }
+
+            contenedor.textContent = "Consultando información meteorológica...";
+            icono.textContent = "⌛";
+
+            try {
+
+                const respuesta = await fetch(
+                    `/api/clima/?ciudad=${encodeURIComponent(ciudad)}`
+                );
+
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    throw new Error(datos.error || "No fue posible consultar el clima.");
+                }
+
+                const iconos = {
+                    0: "☀",
+                    1: "🌤",
+                    2: "⛅",
+                    3: "☁",
+                    45: "🌫",
+                    48: "🌫",
+                    51: "🌦",
+                    53: "🌦",
+                    55: "🌧",
+                    61: "🌧",
+                    63: "🌧",
+                    65: "🌧",
+                    71: "❄",
+                    73: "❄",
+                    75: "❄",
+                    80: "🌦",
+                    81: "🌧",
+                    82: "⛈",
+                    95: "⛈"
+                };
+
+                icono.textContent = iconos[datos.codigo_clima] || "🌤";
+
+                contenedor.replaceChildren();
+
+                const ciudadNombre = document.createElement("h3");
+                ciudadNombre.textContent = `${datos.ciudad}, ${datos.pais}`;
+
+                const temperatura = document.createElement("h2");
+                temperatura.textContent = `${datos.temperatura} °C`;
+
+                const estado = document.createElement("p");
+                estado.className = "clima-estado";
+                estado.textContent = datos.estado;
+
+                const detalles = document.createElement("div");
+                detalles.className = "clima-detalles";
+
+                const valores = [
+                    ["Humedad", `${datos.humedad}%`],
+                    ["Viento", `${datos.viento} ${datos.unidad_viento}`],
+                    ["Sensación térmica", `${datos.sensacion_termica} °C`],
+                    ["Precipitación", `${datos.precipitacion} mm`]
+                ];
+
+                valores.forEach(function(valor) {
+                    const item = document.createElement("div");
+                    const etiqueta = document.createElement("span");
+                    const dato = document.createElement("strong");
+                    etiqueta.textContent = valor[0];
+                    dato.textContent = valor[1];
+                    item.append(etiqueta, dato);
+                    detalles.appendChild(item);
+                });
+
+                const actualizado = document.createElement("p");
+                actualizado.className = "clima-actualizado";
+                actualizado.textContent = `Actualizado: ${datos.actualizado.replace("T", " ")}`;
+
+                contenedor.append(ciudadNombre, temperatura, estado, detalles, actualizado);
+
+            } catch (error) {
+
+                icono.textContent = "⚠";
+
+                contenedor.textContent = error.message;
+
+            }
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            consultarClima();
+
+            document.getElementById("ciudadClima").addEventListener("keydown", function(evento) {
+
+                if (evento.key === "Enter") {
+                    consultarClima();
+                }
+
+            });
 
         });
 

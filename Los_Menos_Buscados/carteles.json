@@ -12,7 +12,7 @@
     {
         "model": "Carteles_criminale.cartel",
         "fields": {
-            "nombre": "Esteban ibañes",
+            "nombre": "ESTEBAN IBAÑEZ",
             "descripcion": "Peligroso ludópata de zapatos. Este criminal pasa todo el día apostando zapatos y acumulando deudas. Aquel que logre capturarlo recibirá todas las deudas que ha acumulado con los años. Pedimos su cooperación.",
             "foto": "carteles/2.jpg",
             "usuario": null
@@ -21,7 +21,7 @@
     {
         "model": "Carteles_criminale.cartel",
         "fields": {
-            "nombre": "Benjamin Fuentes",
+            "nombre": "BENJAMIN FUENTES",
             "descripcion": "Los policías que vinieron de intercambio desde EE. UU. nos han informado de este carterista, que ha estado robando una gran cantidad de celulares. Al que logre capturarlo se le entregarán los celulares que haya robado.",
             "foto": "carteles/3.jpg",
             "usuario": null
@@ -30,7 +30,7 @@
     {
         "model": "Carteles_criminale.cartel",
         "fields": {
-            "nombre": "Miguel escobar",
+            "nombre": "MIGUEL ESCOBAR",
             "descripcion": "Este peligroso traficante de helados ha intentado vender helado en estado puro a niños de la zona central de Chile. Se le considera uno de los peores criminales del Estado. Al que logre capturarlo se le recompensará con 2 uvas y 1 mandarina que estaban en mi refrigerador.",
             "foto": "carteles/4.jpg",
             "usuario": null
@@ -39,8 +39,8 @@
     {
         "model": "Carteles_criminale.cartel",
         "fields": {
-            "nombre": "Hector Campos",
-            "descripcion": "Se le ha visto a este criminal suplicándole a una tal Noelle. Se dice que incluso ha empezado a construir su propio piso cuando se le acabó el piso para arrastrarse. Por ende, su recompensa aumenta a una migaja y 1 palo.",
+            "nombre": "HECTOR CAMPOS",
+            "descripcion": "Se le ha visto a este criminal suplicándole a una tal Noelle. Se dice que incluso se le acabó el piso para arrastrarse y ha empezado a construir su propio piso. Por ende, su recompensa aumenta a una migaja y 1 palo.",
             "foto": "carteles/7.jpg",
             "usuario": null
         }
@@ -49,7 +49,7 @@
         "model": "Carteles_criminale.cartel",
         "fields": {
             "nombre": "VÍCTOR VÁSQUEZ",
-            "descripcion": "Este personaje es presentado como un peligroso criminal y profesor de un instituto, conocido por llevar a sus alumnos a la desesperación con preguntas muy difíciles. La recompensa por capturarlo es pasar el curso.",
+            "descripcion": "Este peligroso criminal es el líder espiritual del Ku Klux Klan y, además, un profesor en un instituto, el cual ha llevado a la desesperación más grande a sus alumnos con preguntas tan difíciles que ni siquiera el propio Albert Einstein podría responder. La recompensa por capturarlo es pasar el curso.",
             "foto": "carteles/8.png",
             "usuario": null
         }
@@ -58,7 +58,7 @@
         "model": "Carteles_criminale.cartel",
         "fields": {
             "nombre": "NICOLAS MADURO",
-            "descripcion": "Este cartel presenta a Nicolás Maduro como un personaje ficticio dentro de la temática humorística de la página. La recompensa indicada en el cartel es Venezuela.",
+            "descripcion": "Este criminal llamado Nicolás Maduro es el presidente más corrupto de la historia de Venezuela, el cual posee la habilidad de multiplicar los penes. Ya fue capturado por las fuerzas especiales de EE. UU. Actualmente se encuentra en una prisión de máxima seguridad. La recompensa por capturarlo fue Venezuela.",
             "foto": "carteles/5.jpg",
             "usuario": null
         }
@@ -66,9 +66,54 @@
     {
         "model": "Carteles_criminale.cartel",
         "fields": {
-            "nombre": "Chuck Norris",
-            "descripcion": "No sé quién ha sido el estúpido que puso a Chuck Norris en esta lista, pero lo único que puedo decir es: pobre del pendejo que intente ir a capturarlo. La recompensa por esa ofensa es la posibilidad de no morir. Así, sin más, ahora repasemos algunas hazañas de nuestra deidad Chuck Norris. Chuck Norris ha contado hasta el infinito. Dos veces.",
+            "nombre": "CHUCK NORRIS",
+            "descripcion": "No sé quién ha sido el estúpido que puso a Chuck Norris en esta lista, pero lo único que puedo decir es: pobre del pendejo que intente ir a capturarlo. La recompensa por esa ofensa es la posibilidad de no morir. Así, sin más, ahora repasemos algunas hazañas de nuestra deidad Chuck Norris. En una ocasión, la muerte tuvo una experiencia cercana a Chuck Norris. Chuck Norris se pasó todos los Metal Slug con una sola moneda de 1 centavo. Las lágrimas de Chuck Norris curan el cáncer. El problema es que él nunca llora. Chuck Norris ha contado hasta el infinito. Dos veces.",
             "foto": "carteles/6.jpg",
+            "usuario": null
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "fields": {
+            "nombre": "ALE",
+            "descripcion": "Este peligroso reguetonero ha sido visto conquistando a chicas más jóvenes que él gracias a su apariencia de niño rata. Su última víctima fue una chica de primero medio, mientras él ya había salido de la media. Se le considera un peligro para la sociedad, por eso se le recompensa con una Maruchan y 3 pesos para el que logre capturarlo.",
+            "foto": "carteles/9.jpg",
+            "usuario": null
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "fields": {
+            "nombre": "LA ROCA",
+            "descripcion": "Este peligroso actor y levantador de cejas ha sido visto en varias películas de acción, y se le considera un peligro para la sociedad debido a su fuerza sobrehumana. La recompensa por capturarlo es 1 pelo de La Roca.",
+            "foto": "carteles/10.jpg",
+            "usuario": null
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "fields": {
+            "nombre": "TRUMP (EL MUROS)",
+            "descripcion": "Este es el presidente de EE. UU., el cual ha sido acusado de poner muros en cada país de sus fronteras, incluso sin permiso de construcción. La recompensa por atraparlo es 1 de sus pelucas.",
+            "foto": "carteles/11.jpg",
+            "usuario": null
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "fields": {
+            "nombre": "JOHN WICK",
+            "descripcion": "Okay, con Chuck Norris por lo menos había esperanza de que no te mate. Con John Wick esa esperanza se esfuma. Literalmente estás intentando capturar al maldito ángel de la muerte: mató a 2 tipos con un lápiz, con un puto lápiz, y agarró a correazos a 2 ninjas japoneses. La recompensa, que ni siquiera hay, es conocer a papá Dios, porque de otra no hay.",
+            "foto": "carteles/12.jpg",
+            "usuario": null
+        }
+    },
+    {
+        "model": "Carteles_criminale.cartel",
+        "fields": {
+            "nombre": "LUIS DIAZ GIRAL",
+            "descripcion": "Este peligroso criminal es el líder espiritual de los illuminati y, además, un profesor en un instituto. Se le ha visto entrando en las chimeneas en vísperas de Navidad y ha sido acusado de robarle los regalos a los niños. La recompensa por capturarlo es pasar la materia y 1 foto con la gente lagarto.",
+            "foto": "carteles/13.jpg",
             "usuario": null
         }
     }
